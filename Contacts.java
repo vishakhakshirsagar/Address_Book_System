@@ -53,14 +53,14 @@ public class Contacts {
     public int getZipcode() {
         return Zipcode;
     }
-    public void setZipcode(int zipcode) {
+    public void setZipcode(Integer zipcode) {
         Zipcode = zipcode;
     }
     public long getPhoneno() {
         return Phone_no;
     }
 
-    public void setPhoneno(int phoneno) {
+    public void setPhoneno(Integer phoneno) {
         Phone_no = (int) phoneno;
     }
 
