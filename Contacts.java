@@ -60,7 +60,7 @@ public class Contacts {
         return Phone_no;
     }
 
-    public void setPhoneno(long phoneno) {
+    public void setPhoneno(int phoneno) {
         Phone_no = (int) phoneno;
     }
 
