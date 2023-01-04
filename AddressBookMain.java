@@ -13,13 +13,12 @@ public class AddressBookMain {
             System.out.println("Welcome To Address Book Managment System");
             System.out.println();
             System.out.println("Operation successful.");
-
             boolean moreChanges = true;
             do {
                 System.out.println("\nChoose the operation on the Directory you want to perform");
                 System.out.println("=============================================================");
                 System.out.println(
-                        "1.Add an Address Book\n2.Edit Existing Address Book\n3.Display Address book Directory\n4.Search Person By Regionn\n5.Exit Address book System");
+                        "1.Add an Address Book\n2.Edit Existing Address Book\n3.Display Address book Directory\n4.Search Person By Regionn\n5.View People By Region\n6.Exit Address book System");
                 int choice = sc.nextInt();
                 switch (choice) {
                     case 1:
@@ -40,6 +39,15 @@ public class AddressBookMain {
                         else
                             searchByState();
                         break;
+                    case 5:
+                        System.out.println("Enter \n1.Display By City\n2.Display By State");
+                        int displayChoice = sc.nextInt();
+                        if (displayChoice == 1)
+                            displayPeopleByRegion(AddressBook.city);
+                        else
+                            displayPeopleByRegion(AddressBook.state);
+                        break;
+
                     default:
                         moreChanges = false;
                         System.out.println("Exiting Address Book Directory !");
@@ -85,7 +93,7 @@ public class AddressBookMain {
         }
 
         /*
-         * search person by city name
+         * searching person by his/her city name
          */
         public static void searchByCity() {
 
@@ -122,6 +130,22 @@ public class AddressBookMain {
             }
 
         }
+
+        /*
+         * Displaying person by his/her city or state
+         */
+        public static void displayPeopleByRegion(HashMap<String, ArrayList<Contacts>> listToDisplay) {
+
+            System.out.println("Enter the name of the region :");
+            String regionName = sc.next();
+
+            listToDisplay.values().stream()
+                    .map(region -> region.stream()
+                            .filter(person -> person.getState().equals(regionName)
+                                    || person.getCity().equals(regionName)))
+                    .forEach(person -> person.forEach(personDetails -> System.out.println(personDetails)));
+        }
+
 
         /*
          * in this method displaying addressBook name
