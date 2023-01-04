@@ -1,44 +1,92 @@
 package AddressBookSystem;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 public class AddressBookMain {
+        public static AddressBook addressBook;
+        static Scanner sc = new Scanner(System.in);
+        static Map<String, AddressBook> addressBookDirectory = new HashMap<String, AddressBook>();
+
         public static void main(String[] args) {
-            //Welcome message for Users
-            System.out.println("Welcome to Address Book System Problem.");
+            System.out.println("Welcome To Address Book Managment System");
+            System.out.println();
+            System.out.println("Operation successful.");
 
-            int choice; //Variable for user Choice
-
-            //Show Menu for user to Select Operation on AddressBook
+            boolean moreChanges = true;
             do {
-                System.out.println("***** ADDRESS BOOK MANAGEMENT *****");
-                System.out.println("1. ADD NEW ADDRESSBOOK\n2. EDIT ADDRESSBOOK\n3. DELETE ADDRESSBOOK" +
-                        "\n4. DISPLAY ADDRESSBOOKS\n5. SELECT ADDRESSBOOK\n6. EXIT");
-                System.out.println("Please Select the Operation Number : ");
-                choice = AddressBookNew.userInput();
-
+                System.out.println("\nChoose the operation on the Directory you want to perform");
+                System.out.println("=============================================================");
+                System.out.println(
+                        "1.Add an Address Book\n2.Edit Existing Address Book\n3.Display Address book Directory\n4.Exit Address book System");
+                int choice = sc.nextInt();
                 switch (choice) {
                     case 1:
-                        AddressBookNew.addNewAddressBook();    //Adding New Address Book to System
+                        addAddressBook();
                         break;
                     case 2:
-                        //Edit Address Book Details
-                        //addressBook.editContact();
+                        editAddressBook();
+
                         break;
                     case 3:
-                        AddressBookNew.deleteAddressBook();    //Delete the Address Book Details
-                        break;
-                    case 4:
-                        AddressBookNew.displayAddressBooks();  //Show Contact Details
-                        break;
-                    case 5:
-                        AddressBookNew.selectAddressBook();
-                        break;
-                    case 6:
-                        System.out.println("Thank You for using Address Book System.");
+                        displayDirectoryContents();
                         break;
                     default:
-                        System.out.println("Please Select the Operation between 1 to 6 only.");
-                        break;
+                        moreChanges = false;
+                        System.out.println("Exiting Address Book Directory !");
                 }
-            } while (choice != 6);
+
+            } while (moreChanges);
+
+        }
+
+        /*
+         * Adding new address book to by checking existing book is available or not
+         */
+        public static void addAddressBook() {
+            AddressBook addressBook = new AddressBook();
+            System.out.println("Enter the name of the Address Book you want to add");
+            String bookNameToAdd = sc.next();
+
+            if (addressBookDirectory.containsKey(bookNameToAdd)) {
+                addressBook = addressBookDirectory.get(bookNameToAdd);
+                addressBook.displayMenu();
+            } else {
+                addressBook.setAddressBookName(bookNameToAdd);
+                addressBookDirectory.put(bookNameToAdd, addressBook);
+                System.out.println("Address book added successfully.");
+                addressBook.displayMenu();
+            }
+        }
+
+        /*
+         * in this method.. calling existing address book and editing them.
+         */
+        public static void editAddressBook() {
+
+            System.out.println("Enter the Name of the Address Book which you want to edit:");
+            String addressBookToEdit = sc.next();
+
+            if (addressBookDirectory.containsKey(addressBookToEdit)) {
+                addressBook = addressBookDirectory.get(addressBookToEdit);
+                addressBook.displayMenu();
+            } else {
+                System.out.println("Book Does Not Exist");
+            }
+        }
+
+        /*
+         * in this method displaying addressBook name
+         */
+        static void displayDirectoryContents() {
+
+            System.out.println("----- Contents of the Address Book Directory-----");
+            for (String eachBookName : addressBookDirectory.keySet()) {
+
+                System.out.println(eachBookName);
+            }
+            System.out.println("-----------------------------------------");
+
         }
     }

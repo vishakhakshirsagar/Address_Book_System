@@ -8,7 +8,7 @@ public class Contacts {
     static String Address;
     static String City;
     static String State;
-    static int Zipcode;
+    static long Zipcode;
     static long Phone_no;
     static String Email;
 
@@ -50,17 +50,17 @@ public class Contacts {
     public void setState(String state) {
         State = state;
     }
-    public int getZipcode() {
+    public long getZipcode() {
         return Zipcode;
     }
-    public void setZipcode(Integer zipcode) {
+    public void setZipcode(long zipcode) {
         Zipcode = zipcode;
     }
     public long getPhoneno() {
         return Phone_no;
     }
 
-    public void setPhoneno(Integer phoneno) {
+    public void setPhoneno(long phoneno) {
         Phone_no = (int) phoneno;
     }
 
@@ -104,5 +104,17 @@ public class Contacts {
         System.out.println("Enter Email :");
         Scanner E = new Scanner(System.in);
         Email = E.nextLine();
+    }
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "firstName='" + Firstname + '\'' +
+                ", lastName='" + Lastname + '\'' +
+                ", email='" + Email + '\'' +
+                ", phoneNumber=" + Phone_no +
+                ", city='" + City + '\'' +
+                ", state='" + State + '\'' +
+                ", zip=" + Zipcode +
+                '}';
     }
 }
