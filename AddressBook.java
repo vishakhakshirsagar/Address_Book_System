@@ -82,11 +82,11 @@ public class AddressBook {
 
                 person.setFirstname(firstName);
                 person.setLastname(lastName);
-                person.setPhoneno((int) phoneNumber);
+                person.setPhoneno(phoneNumber);
                 person.setEmail(email);
                 person.setCity(city);
                 person.setState(state);
-                person.setZipcode(person.getZipcode());
+                person.setZipcode(zip);
                 addPersonToCity(person);
                 addPersonToState(person);
                 contactList.put(firstName.toLowerCase(), person);
@@ -186,6 +186,6 @@ public class AddressBook {
                 System.out.println(iterator.next());
                 System.out.println();
             }
-            System.out.println("==========");
+            System.out.println("=======================================");
         }
     }

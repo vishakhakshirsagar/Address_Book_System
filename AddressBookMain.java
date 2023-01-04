@@ -1,5 +1,5 @@
 package AddressBookSystem;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -19,7 +19,7 @@ public class AddressBookMain {
                 System.out.println("\nChoose the operation on the Directory you want to perform");
                 System.out.println("=============================================================");
                 System.out.println(
-                        "1.Add an Address Book\n2.Edit Existing Address Book\n3.Display Address book Directory\n4.Exit Address book System");
+                        "1.Add an Address Book\n2.Edit Existing Address Book\n3.Display Address book Directory\n4.Search Person By Regionn\n5.Exit Address book System");
                 int choice = sc.nextInt();
                 switch (choice) {
                     case 1:
@@ -31,6 +31,14 @@ public class AddressBookMain {
                         break;
                     case 3:
                         displayDirectoryContents();
+                        break;
+                    case 4:
+                        System.out.println("Enter \n1.Search By City\n2.Search By State");
+                        int searChoice = sc.nextInt();
+                        if (searChoice == 1)
+                            searchByCity();
+                        else
+                            searchByState();
                         break;
                     default:
                         moreChanges = false;
@@ -74,6 +82,45 @@ public class AddressBookMain {
             } else {
                 System.out.println("Book Does Not Exist");
             }
+        }
+
+        /*
+         * search person by city name
+         */
+        public static void searchByCity() {
+
+            System.out.println("Enter the name of the City where the Person resides : ");
+            String cityName = sc.next();
+            System.out.println("Enter the name of the Person : ");
+            String personName = sc.next();
+
+            for (AddressBook addressBook : addressBookDirectory.values()) {
+                ArrayList<Contacts> contactList = addressBook.getContact();
+                contactList.stream()
+                        .filter(person -> person.getFirstname().equals(personName)
+                                && person.getCity().equals(cityName))
+                        .forEach(person -> System.out.println(person));
+            }
+        }
+
+        /*
+         * searching person by his/her state name
+         */
+        public static void searchByState() {
+
+            System.out.println("Enter the name of the State where the Person resides : ");
+            String stateName = sc.next();
+            System.out.println("Enter the name of the Person : ");
+            String personName = sc.next();
+
+            for (AddressBook addressBook : addressBookDirectory.values()) {
+                ArrayList<Contacts> contactList = ((AddressBook) addressBook).getContact();
+                contactList.stream()
+                        .filter(person -> person.getFirstname().equals(personName)
+                                && person.getState().equals(stateName))
+                        .forEach(person -> System.out.println(person));
+            }
+
         }
 
         /*

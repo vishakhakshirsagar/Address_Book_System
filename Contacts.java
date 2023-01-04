@@ -3,6 +3,10 @@ package AddressBookSystem;
 import java.util.Scanner;
 
 public class Contacts {
+    private String firstname,lastname, email;
+    private long phoneno;
+    private String city, state;
+    private long zipcode;
     static String Firstname;
     static String Lastname;
     static String Address;
