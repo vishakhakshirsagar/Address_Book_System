@@ -3,39 +3,42 @@ package AddressBookSystem;
 public class AddressBookMain {
         public static void main(String[] args) {
             //Welcome message for Users
-            System.out.println("-------Welcome to Address Book System---------");
+            System.out.println("Welcome to Address Book System Problem.");
 
-            //Variable for user Choice
-            int choice;
+            int choice; //Variable for user Choice
 
-            //AddressBook Object for Contact
-            AddressBook addressBook = new AddressBook();
-
+            //Show Menu for user to Select Operation on AddressBook
             do {
-                System.out.println("1. Add New Contact\n2. Edit Contact\n3. Delete Contact" +
-                        "\n4. Display Contact\n5. Exit");
-                System.out.println("Enter Choice: ");
-                choice = addressBook.sc.nextInt();
+                System.out.println("***** ADDRESS BOOK MANAGEMENT *****");
+                System.out.println("1. ADD NEW ADDRESSBOOK\n2. EDIT ADDRESSBOOK\n3. DELETE ADDRESSBOOK" +
+                        "\n4. DISPLAY ADDRESSBOOKS\n5. SELECT ADDRESSBOOK\n6. EXIT");
+                System.out.println("Please Select the Operation Number : ");
+                choice = AddressBookNew.userInput();
 
                 switch (choice) {
                     case 1:
-                        addressBook.addNewContact();
+                        AddressBookNew.addNewAddressBook();    //Adding New Address Book to System
                         break;
                     case 2:
+                        //Edit Address Book Details
+                        //addressBook.editContact();
                         break;
                     case 3:
+                        AddressBookNew.deleteAddressBook();    //Delete the Address Book Details
                         break;
                     case 4:
-                        addressBook.displayContact();
+                        AddressBookNew.displayAddressBooks();  //Show Contact Details
                         break;
                     case 5:
-                        System.out.println("Thank You for Using Address Book.");
+                        AddressBookNew.selectAddressBook();
+                        break;
+                    case 6:
+                        System.out.println("Thank You for using Address Book System.");
                         break;
                     default:
-                        System.out.println("Please Select between 1 to 5 only.");
+                        System.out.println("Please Select the Operation between 1 to 6 only.");
                         break;
                 }
-            } while (choice != 5);
-
+            } while (choice != 6);
         }
     }
